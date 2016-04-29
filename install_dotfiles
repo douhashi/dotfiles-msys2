@@ -3,13 +3,23 @@
 WORKING_DIR=`pwd`
 echo "Start install dotfiles..."
 
-echo "installing zsh dotfiles"
+echo "[zsh] installing zsh and dotfiles -------------------------------------------------------------"
+pacman -S --quiet --noconfirm zsh
+rm -rf ~/.zsh
 ln -sf $WORKING_DIR/zsh/_zshrc ~/.zshrc
 ln -sf $WORKING_DIR/zsh/_zsh ~/.zsh
 
-echo "installing vim dotfiles"
+echo "[vim] installing vim and dotfiles -------------------------------------------------------------"
+pacman -S --quiet --noconfirm vim
+rm -rf ~/.vim
 ln -sf $WORKING_DIR/vim/_vimrc ~/.vimrc
 ln -sf $WORKING_DIR/vim/_vim ~/.vim
 
-echo "installing tmux dotfiles"
+echo "[vim] installing dein -------------------------------------------------------------------------"
+pacman -S --quiet --noconfirm rsync
+\curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
+sh /tmp/installer.sh ~/.vim/dein
+
+echo "[tmux] installing tmux and dotfiles -----------------------------------------------------------"
+pacman -S --quiet --noconfirm tmux
 ln -sf $WORKING_DIR/tmux/_tmux.conf ~/.tmux.conf
