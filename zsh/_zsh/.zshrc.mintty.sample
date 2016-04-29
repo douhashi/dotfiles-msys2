@@ -1,0 +1,19 @@
+function settitle ()
+{
+	t="[$@]"
+	# "\e]2;" > control code to start changing the window title
+	# "\007"  > control code to end
+	echo -ne "\e]2;$t\007"
+}
+
+function cd()
+{
+	builtin cd $@ && settitle `pwd`
+}
+
+export ANSIBLE_SSH_ARGS="-o ControlMaster=no"
+
+eval `ssh-agent -s`
+ssh-add
+
+alias tmux='rm -rf "/tmp/tmux*" && tmux'
